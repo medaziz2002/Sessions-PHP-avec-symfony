@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mastermind{% endblock %}
+
+{% block body %}
+    <h1>Mastermind</h1>
+
+    {% if fini %}
+        <p>Bravo ! Vous avez trouvé le code secret ! 🎉</p>
+    {% endif %}
+
+    <form method="get" action="{{ path('app_mastermind') }}">
+        <label for="proposition">Entrez 4 chiffres :</label>
+        <input type="text" name="proposition" id="proposition" maxlength="4" required pattern="[0-9]{4}">
+        <button type="submit">Tester</button>
+    </form>
+
+    <h2>Historique des essais :</h2>
+    <ul>
+        {% for essai in essais %}
+            <li>{{ essai.proposition }} - Bien placés: {{ essai.bienPlaces }}, Mal placés: {{ essai.malPlaces }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
